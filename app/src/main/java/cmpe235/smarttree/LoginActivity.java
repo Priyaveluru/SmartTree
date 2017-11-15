@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.login_btn){
+        if (v.getId() == R.id.login_btn) {
 
             //get all the parameters that user enter
             EditText emailAddress = (EditText) findViewById(R.id.email_login);
@@ -38,22 +38,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             EditText pass = (EditText) findViewById(R.id.password_login);
             String password = pass.getText().toString();
 
-            DBConnector dbConnector = new DBConnector(this);
 
-            String password1 = dbConnector.login(email);
-             //Comparing Database password with entered password
-            if(password.equals(password1)){
-
-                Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                String username = dbConnector.getUsername(password);
-                intent.putExtra("username",username);
-                startActivity(intent);
-                finish();
+            if ((email.trim().length() == 0) && (password.trim().length() == 0)) {
+                Toast.makeText(LoginActivity.this, "Please enter details", Toast.LENGTH_LONG).show();
+            }
+            else if(email.trim().equals("")){
+                Toast.makeText(this, "Please enter email ", Toast.LENGTH_SHORT).show();
+            }
+            else if (password.trim().equals("")) {
+                Toast.makeText(this, "please enter password ", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(LoginActivity.this,"Invalid Credentials",Toast.LENGTH_LONG).show();
-            }
+                DBConnector dbConnector = new DBConnector(this);
+                String password1 = dbConnector.login(email);
+                //Comparing Database password with entered password
+                if (password.equals(password1)) {
 
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    String username = dbConnector.getUsername(password);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
         }
     }
 }

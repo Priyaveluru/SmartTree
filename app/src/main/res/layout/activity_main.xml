@@ -1,7 +1,9 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent"
     >
 
@@ -32,23 +34,23 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_circle"
         android:text="Interact"
+        android:layout_alignBaseline="@+id/Nearby"
+        android:layout_alignBottom="@+id/Nearby"
+        android:layout_alignRight="@+id/Photo"
+        android:layout_alignEnd="@+id/Photo"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp" />
+
+    <Button
+        android:id="@+id/photo_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_circle"
+        android:text="Video"
         android:layout_alignBaseline="@+id/About"
         android:layout_alignBottom="@+id/About"
         android:layout_toRightOf="@+id/Nearby"
         android:layout_toEndOf="@+id/Nearby" />
-
-    <Button
-        android:id="@+id/photo_video"
-        android:background="@drawable/button_circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Photo/Video"
-        android:layout_alignBaseline="@+id/Comment"
-        android:layout_alignBottom="@+id/Comment"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginEnd="19dp" />
 
     <Button
         android:id="@+id/Comment"
@@ -66,12 +68,43 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/smart_tree1"
+        android:src="@drawable/home"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/Audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_circle"
+        android:text="Audio"
+        android:layout_below="@+id/About"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/Photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_circle"
+        android:text="Photo"
+        android:layout_below="@+id/Nearby"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:text="Smart Tree"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="24sp"
+        tools:text="Smart Tree" />
 
 
 </RelativeLayout>

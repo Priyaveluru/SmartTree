@@ -1,5 +1,6 @@
 package cmpe235.smarttree;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -18,7 +18,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
 
-public class AboutActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class AboutActivity extends Activity implements ZXingScannerView.ResultHandler {
     //Barcode Functionality is implemented in this class
 
     private static final int REQUEST_CAMERA=1;
@@ -135,5 +135,6 @@ public class AboutActivity extends AppCompatActivity implements ZXingScannerView
         builder.setMessage(scanResult);
         AlertDialog alert= builder.create();
         alert.show();
+        //alert.getWindow().setBackgroundDrawableResource(android.R.color.holo_green_light);
     }
 }

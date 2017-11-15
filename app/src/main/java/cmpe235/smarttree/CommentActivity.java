@@ -12,6 +12,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     //This class handles the comment functionality
     private RatingBar ratingBar;
     private Button submit;
+
+    private Button show;
     private  DBConnector dbConnector= new DBConnector(this);
 
     @Override
@@ -30,8 +32,23 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         });
         //set up the submit button
         submit = (Button) findViewById(R.id.submit);
+
+        show = (Button) findViewById(R.id.show);
         //set up the listener on submit button
         submit.setOnClickListener(this);
+
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CommentActivity.this, ReviewComments.class);
+                startActivity(i);
+
+
+            }
+        });
+
+
+
     }
 
     @Override

@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         Button Comment=(Button) findViewById(R.id.Comment);
         Button photo_video=(Button)findViewById(R.id.photo_video);
         Button Interact=(Button)findViewById(R.id.Interact);
+        Button Audio=(Button)findViewById(R.id.Audio);
+        Button Photo=(Button)findViewById(R.id.Photo);
         //On clicking Nearby button it will be redirected to MapsActivity class
         Nearby.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         About.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, AboutActivity.class);
+                Intent i = new Intent(MainActivity.this, InteractActivity.class);
                 startActivity(i);
             }
         });
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Interact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, InteractActivity.class);
+                Intent i = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(i);
             }
         });
@@ -62,6 +64,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        Audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, AudioActivity.class);
+                startActivity(i);
+            }
+        });
+        Photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, PhotoActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
     }
     }

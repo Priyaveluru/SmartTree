@@ -6,13 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by YuexingYin on 3/13/16.
+ * Created by Priya on 10/13/17.
  * This class provides all the database operations, including connecting database, all the transaction of database
  */
 
 
-public class DBConnector extends SQLiteOpenHelper{
+public class DBConnector extends SQLiteOpenHelper {
     //To store all the data in db we are using this class
 
     private static final int DATABASE_VERSION = 1;
@@ -27,15 +30,15 @@ public class DBConnector extends SQLiteOpenHelper{
     private static final String COLUMN_PHONE = "phone";
 
     //parameters for comment table
-    private static final String TABLE_COMMENT= "comment";//create a comment table to store user's comment
+    private static final String TABLE_COMMENT = "comment";//create a comment table to store user's comment
     private static final String COLUMN_COMMENT = "comment";
     private static final String COLUMN_RANKING = "ranking";
 
     SQLiteDatabase db;
 
 
-    public DBConnector(Context context){
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    public DBConnector(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -44,13 +47,13 @@ public class DBConnector extends SQLiteOpenHelper{
         String CREATE_USER_TABLE = "CREATE TABLE " +
                 TABLE_USER + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_EMAIL
-                + " TEXT," + COLUMN_PASSWORD+ " TEXT," + COLUMN_USERNAME+" TEXT,"+ COLUMN_PHONE+" TEXT"+")";
+                + " TEXT," + COLUMN_PASSWORD + " TEXT," + COLUMN_USERNAME + " TEXT," + COLUMN_PHONE + " TEXT" + ")";
 
         //create comment table query
         String CREATE_COMMENT_TABLE = "CREATE TABLE " +
                 TABLE_COMMENT + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_COMMENT
-                + " TEXT," + COLUMN_RANKING + " TEXT," + COLUMN_USERNAME+" TEXT"+")";
+                + " TEXT," + COLUMN_RANKING + " TEXT," + COLUMN_USERNAME + " TEXT" + ")";
 
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_COMMENT_TABLE);
@@ -63,16 +66,16 @@ public class DBConnector extends SQLiteOpenHelper{
 
         String query = "DROP TABLE IF EXISTS ";
 
-        db.execSQL(query+TABLE_USER);
-        db.execSQL(query+TABLE_COMMENT);
+        db.execSQL(query + TABLE_USER);
+        db.execSQL(query + TABLE_COMMENT);
         this.onCreate(db);
 
     }
 
     //Sign up method
-    public void insertUser(UserDetails user){
+    public void insertUser(UserDetails user) {
 
-        db=this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_EMAIL, user.getEmail());
         contentValues.put(COLUMN_PASSWORD, user.getPassword());
@@ -87,12 +90,12 @@ public class DBConnector extends SQLiteOpenHelper{
     }
 
     //user login method
-    public String login(String email){
+    public String login(String email) {
 
-        db=this.getReadableDatabase();
-        String query = "select password from user where email = '"+email+"'";
+        db = this.getReadableDatabase();
+        String query = "select password from user where email = '" + email + "'";
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
 
         cursor.moveToFirst();
 
@@ -104,7 +107,7 @@ public class DBConnector extends SQLiteOpenHelper{
     }
 
     //insert user's comment in database
-    public void insertComment(CommentDetails comment){
+    public void insertComment(CommentDetails comment) {
 
         db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -117,12 +120,12 @@ public class DBConnector extends SQLiteOpenHelper{
     }
 
     //get username from database
-    public String getUsername(String password){
+    public String getUsername(String password) {
 
-        db =this.getReadableDatabase();
-        String query = "select username from user where password = '"+password+"'";
+        db = this.getReadableDatabase();
+        String query = "select username from user where password = '" + password + "'";
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
 
         String username = cursor.getString(0);
@@ -130,5 +133,24 @@ public class DBConnector extends SQLiteOpenHelper{
         db.close();
 
         return username;
+    }
+
+    public List<String> getAllComments() {
+
+        List<String> commentData = new ArrayList<>();
+        db = this.getReadableDatabase();
+        String query = "Select comment from comment";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            commentData.add(cursor.getString(cursor.getColumnIndex("comment")));
+            while (cursor.moveToNext()) {
+                commentData.add(cursor.getString(cursor.getColumnIndex("comment")));
+            }
+        }
+        cursor.close();
+        db.close();
+        return commentData;
+
     }
 }
